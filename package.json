@@ -1,0 +1,19 @@
+{
+  "name": "fastify-web-server",
+  "version": "1.0.0",
+  "description": "Dockerizing a fastify web server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "fastify",
+    "nodejs"
+  ],
+  "author": "Newton Costa",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^3.13.0"
+  }
+}
