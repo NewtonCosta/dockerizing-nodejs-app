@@ -35,7 +35,7 @@ It's recommended add **node_modules** and **npm-debug.log** to prevent your loca
 
 <hr>
 
- Checkout 
+ Pick up the [Dockerfile](https://github.com/NewtonCosta/dockerizing-nodejs-app/blob/3a3ba5ef73bd11f85dfe8385a151568b093afebb/Dockerfile) as an example. 
  
  
  
