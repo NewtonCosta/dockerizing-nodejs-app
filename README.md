@@ -34,6 +34,9 @@ It's recommended add **node_modules** and **npm-debug.log** to prevent your loca
 [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) allow you to drastically reduce the size of your final image, without struggling to reduce the number of intermediate layers and files.
 
 <hr>
- # Example
+
+ Checkout 
+ 
+ 
  
  
