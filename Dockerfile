@@ -1,28 +1,33 @@
-# Depending of your application requirement, is good practice to stick the base image version tag instead of using latest.
-# Basically, using "image:lalest", every since the image is updated the latest tag will change, 
-# probabily causing some incompatibility issue 
-FROM node:lts-alpine
+# ----------------------- Build Stage ---------------------- #
+FROM node:lts-alpine as build
 
-# Using dumb-init to handler npm process
-RUN apk add dumb-init
+# Setting work directory
+WORKDIR /usr/src/app/
 
+# Copy packages files to workdir, changing owner to node user
+COPY  package*.json ./
+
+# Environment variable for env description
 ENV NODE_ENV=production
 
-WORKDIR /usr/src/app
-
-# Copy app files and change owner to node user
-COPY --chown=node:node . /usr/src/app
-
 # Use "npm ci" instead of "npm install"
-RUN npm ci --only=production
+RUN npm ci --only=${NODE_ENV}
 
-# Explicitly running npm command with node user
-# It's note recommended running npm command with sudo/root privilege
-USER node
+# ----------------------- Release Stage ---------------------- #
+FROM alpine:3.12 as release
 
-# CMD "npm" "start"
-# CMD "yarn" "start"
-# CMD ["yarn", "start"]
-# CMD ["node", "server.js"]
-# Options above works, but is not recommended for production
-CMD ["dumb-init", "node", "server.js"]
+# Install npm
+RUN apk add npm
+
+# Setting work directoey
+WORKDIR /usr/src/app/
+
+# Bundle application source code
+COPY --from=build /usr/src/app/ .
+COPY . .
+
+# Published port documentation
+EXPOSE 3000
+
+# Using dumbe-init to deal with node process
+CMD [ "node", "server.js"]
