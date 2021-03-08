@@ -1,5 +1,5 @@
 # ----------------------- Build Stage ---------------------- #
-FROM node:lts-alpine as build
+FROM node:14 as build
 
 # Setting work directory
 WORKDIR /usr/src/app/
